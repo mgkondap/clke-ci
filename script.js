@@ -35,6 +35,30 @@ function copyToClipboard(button, text) {
     document.body.removeChild(textarea);
 }
 
+// Show pre-production disclaimer banner
+function showPreProdDisclaimer() {
+    // Check if we're on pre-prod by looking at the URL path
+    if (window.location.pathname.includes('pre-prod')) {
+        const disclaimer = document.createElement('div');
+        disclaimer.className = 'preprod-disclaimer';
+        disclaimer.innerHTML = `
+            <div class="preprod-content">
+                <span class="preprod-icon">⚠️</span>
+                <div>
+                    <strong>PRE-PRODUCTION ENVIRONMENT</strong><br>
+                    <span style="font-size: 0.9rem;">This is a development/testing portal. For official releases, please visit the production site.</span>
+                </div>
+            </div>
+        `;
+        
+        // Insert at the top of the container
+        const container = document.querySelector('.container');
+        if (container && container.firstChild) {
+            container.insertBefore(disclaimer, container.firstChild);
+        }
+    }
+}
+
 // Load releases from JSON
 async function loadAllReleases() {
     try {
@@ -254,6 +278,9 @@ const observer = new IntersectionObserver((entries) => {
 
 // Load releases from JSON on page load
 document.addEventListener('DOMContentLoaded', () => {
+    // Show pre-prod disclaimer if on pre-prod environment
+    showPreProdDisclaimer();
+    
     loadAllReleases();
     
     const blocks = document.querySelectorAll('.instruction-block');
