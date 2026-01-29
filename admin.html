@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALOS Kernel Releases - Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .admin-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-form, .admin-form {
+            display: none;
+        }
+        
+        .login-form.active, .admin-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        
+        .message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+        
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+        
+        .message.active {
+            display: block;
+        }
+        
+        .releases-list {
+            margin-top: 30px;
+        }
+        
+        .release-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9ff;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .release-item:hover {
+            background: #e8ecff;
+        }
+        
+        .release-info {
+            flex-grow: 1;
+        }
+        
+        .release-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            padding: 6px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .logout-btn {
+            padding: 8px 20px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Login Form -->
+        <div class="login-form active" id="loginForm">
+            <h1 style="color: #667eea; margin-bottom: 30px;">Admin Login</h1>
+            <div class="message" id="loginMessage"></div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter admin password">
+            </div>
+            <button class="btn btn-primary" onclick="login()">Login</button>
+        </div>
+
+        <!-- Admin Form -->
+        <div class="admin-form" id="adminForm">
+            <div class="header-actions">
+                <h1 style="color: #667eea; margin: 0;">Manage Releases</h1>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+            
+            <div class="message" id="adminMessage"></div>
+            
+            <h2 style="margin-top: 30px;">Add New Release</h2>
+            
+            <div class="form-group">
+                <label for="platform">Platform:</label>
+                <select id="platform">
+                    <option value="PTL">PTL</option>
+                    <option value="WCL">WCL</option>
+                    <option value="NVL">NVL</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="releaseTag">Release Tag: (e.g., NVL-IA17K6.18DI_2026W02)</label>
+                <input type="text" id="releaseTag" placeholder="NVL-IA17K6.18DI_2026W02" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="releaseDate">Release Date:</label>
+                <input type="date" id="releaseDate" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="kernelVersion">Kernel Version:</label>
+                <input type="text" id="kernelVersion" placeholder="6.8.5" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status">
+                    <option value="Stable">Stable</option>
+                    <option value="LTS">LTS</option>
+                    <option value="Legacy">Legacy</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="features">Key Features:</label>
+                <textarea id="features" rows="3" placeholder="Performance improvements, security patches"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="imageLink">Prebuild Image Link:</label>
+                <input type="url" id="imageLink" placeholder="https://...">
+            </div>
+            
+            <div class="form-group">
+                <label for="jiraTicket">JIRA Ticket ID: (e.g., CHRMOS-19358)</label>
+                <input type="text" id="jiraTicket" placeholder="CHRMOS-19358" required>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-primary" onclick="addRelease()">Add Release</button>
+                <button class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+                <a href="index.html" class="btn btn-secondary" style="text-decoration: none; text-align: center;">View Public Page</a>
+            </div>
+            
+            <div class="releases-list" id="releasesList"></div>
+        </div>
+    </div>
+
+    <script>
+        const ADMIN_PASSWORD = 'alos2026'; // Change this password!
+        let isLoggedIn = false;
+        
+        // Check login status on page load
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            showAdminForm();
+            loadReleases();
+        }
+        
+        function login() {
+            const password = document.getElementById('password').value;
+            const message = document.getElementById('loginMessage');
+            
+            if (password === ADMIN_PASSWORD) {
+                isLoggedIn = true;
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                showMessage(message, 'Login successful!', 'success');
+                setTimeout(() => {
+                    showAdminForm();
+                    loadReleases();
+                }, 500);
+            } else {
+                showMessage(message, 'Invalid password!', 'error');
+            }
+        }
+        
+        function logout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            document.getElementById('loginForm').classList.add('active');
+            document.getElementById('adminForm').classList.remove('active');
+            document.getElementById('password').value = '';
+        }
+        
+        function showAdminForm() {
+            document.getElementById('loginForm').classList.remove('active');
+            document.getElementById('adminForm').classList.add('active');
+        }
+        
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.className = 'message ' + type + ' active';
+            setTimeout(() => {
+                element.classList.remove('active');
+            }, 5000);
+        }
+        
+        async function loadReleases() {
+            try {
+                const response = await fetch('releases.json');
+                const data = await response.json();
+                displayReleases(data);
+            } catch (error) {
+                console.error('Error loading releases:', error);
+            }
+        }
+        
+        function displayReleases(data) {
+            const container = document.getElementById('releasesList');
+            const platform = document.getElementById('platform').value;
+            const releases = data[platform] || [];
+            
+            if (releases.length === 0) {
+                container.innerHTML = '<p style="color: #888;">No releases yet for this platform.</p>';
+                return;
+            }
+            
+            container.innerHTML = '<h3 style="margin-top: 30px;">Existing Releases (' + platform + ')</h3>';
+            releases.forEach((release, index) => {
+                const item = document.createElement('div');
+                item.className = 'release-item';
+                item.innerHTML = `
+                    <div class="release-info">
+                        <strong>${release.releaseTag}</strong> - ${release.releaseDate}<br>
+                        <small style="color: #666;">${release.features}</small>
+                    </div>
+                    <div class="release-actions">
+                        <button class="btn btn-secondary btn-small" onclick="deleteRelease('${platform}', ${index})">Delete</button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+        
+        async function addRelease() {
+            const message = document.getElementById('adminMessage');
+            
+            const newRelease = {
+                releaseTag: document.getElementById('releaseTag').value.trim(),
+                releaseDate: document.getElementById('releaseDate').value,
+                kernelVersion: document.getElementById('kernelVersion').value.trim(),
+                status: document.getElementById('status').value,
+                features: document.getElementById('features').value.trim(),
+                imageLink: document.getElementById('imageLink').value.trim() || '#',
+                jiraTicket: document.getElementById('jiraTicket').value.trim(),
+                jiraLink: `https://jira.devtools.intel.com/browse/${document.getElementById('jiraTicket').value.trim()}`,
+                manifestLink: `https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/${document.getElementById('releaseTag').value.trim()}`
+            };
+            
+            // Validation
+            if (!newRelease.releaseTag || !newRelease.releaseDate || !newRelease.kernelVersion || !newRelease.jiraTicket) {
+                showMessage(message, 'Please fill in all required fields!', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('releases.json');
+                const data = await response.json();
+                
+                const platform = document.getElementById('platform').value;
+                if (!data[platform]) {
+                    data[platform] = [];
+                }
+                
+                // Add to beginning of array (newest first)
+                data[platform].unshift(newRelease);
+                
+                // Save data
+                await saveData(data);
+                
+                showMessage(message, 'Release added successfully!', 'success');
+                clearForm();
+                loadReleases();
+            } catch (error) {
+                showMessage(message, 'Error adding release: ' + error.message, 'error');
+            }
+        }
+        
+        async function deleteRelease(platform, index) {
+            if (!confirm('Are you sure you want to delete this release?')) {
+                return;
+            }
+            
+            const message = document.getElementById('adminMessage');
+            
+            try {
+                const response = await fetch('releases.json');
+                const data = await response.json();
+                
+                data[platform].splice(index, 1);
+                
+                await saveData(data);
+                
+                showMessage(message, 'Release deleted successfully!', 'success');
+                loadReleases();
+            } catch (error) {
+                showMessage(message, 'Error deleting release: ' + error.message, 'error');
+            }
+        }
+        
+        async function saveData(data) {
+            const response = await fetch('save_release.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to save data');
+            }
+            
+            return await response.json();
+        }
+        
+        function clearForm() {
+            document.getElementById('releaseTag').value = '';
+            document.getElementById('releaseDate').value = '';
+            document.getElementById('kernelVersion').value = '';
+            document.getElementById('features').value = '';
+            document.getElementById('imageLink').value = '';
+            document.getElementById('jiraTicket').value = '';
+        }
+        
+        // Reload releases when platform changes
+        document.getElementById('platform').addEventListener('change', loadReleases);
+    </script>
+</body>
+</html>

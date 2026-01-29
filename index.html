@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALOS Kernel Releases</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top-header">
+            <h2>SAI PSE CLIENT LINUX KERNEL ENGINEERING</h2>
+        </div>
+        
+        <header>
+            <h1>ALOS Kernel Releases</h1>
+            <p class="subtitle">Official kernel releases and download instructions</p>
+        </header>
+
+        <div class="news-banner" id="newsBanner">
+            <div class="news-icon">📢</div>
+            <div class="news-content" id="newsContent">
+                <strong>Latest Stable Release:</strong> 
+                <span id="newsRelease">Loading...</span>
+            </div>
+        </div>
+
+        <div class="platform-tabs">
+            <button class="tab-button active" onclick="switchPlatform('PTL')">PTL</button>
+            <button class="tab-button" onclick="switchPlatform('WCL')">WCL</button>
+            <button class="tab-button" onclick="switchPlatform('NVL')">NVL</button>
+        </div>
+
+        <section class="releases">
+            <h2 id="platformTitle">PTL: ALOS Kernel Release History</h2>
+            
+            <div class="repo-links">
+                <h3>Repository Links</h3>
+                <div class="repo-item">
+                    <strong>Kernel:</strong> 
+                    <a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-common" target="_blank">os.android.externalmirror.alos.kernel-common</a>
+                </div>
+                <div class="repo-item">
+                    <strong>Private devices:</strong> 
+                    <a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-desktop-private-devices-google-x86-64-intel-fatcat" target="_blank">os.android.externalmirror.alos.kernel-desktop-private-devices-google-x86-64-intel-fatcat</a>
+                </div>
+            </div>
+            
+            <!-- PTL Platform -->
+            <div id="PTL-releases" class="platform-content active">
+                <div class="table-wrapper">
+                    <table class="release-table">
+                        <thead>
+                            <tr>
+                                <th>RLS TAG</th>
+                                <th>Release Date</th>
+                                <th>Kernel Version</th>
+                                <th>Status</th>
+                                <th>Key Features</th>
+                                <th>Prebuild Image Link</th>
+                                <th>JIRA Ticket Link</th>
+                                <th>Script to Clone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="PTL-tbody">
+                            <tr>
+                                <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2026W02" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2026W02</a></strong></td>
+                                <td>2026-01-15</td>
+                                <td>6.8.5</td>
+                                <td><span class="badge badge-stable">Stable</span></td>
+                                <td>Performance improvements, security patches</td>
+                                <td><a href="#" class="btn-link">Image</a></td>
+                                <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19358" target="_blank" class="jira-link">CHRMOS-19358</a></td>
+                                <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2026W02')">Clone Script</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W50" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2025W50</a></strong></td>
+                                <td>2025-12-10</td>
+                                <td>6.7.2</td>
+                                <td><span class="badge badge-stable">Stable</span></td>
+                                <td>Driver updates, bug fixes</td>
+                                <td><a href="#" class="btn-link">Image</a></td>
+                                <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19357" target="_blank" class="jira-link">CHRMOS-19357</a></td>
+                                <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2025W50')">Clone Script</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W45" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2025W45</a></strong></td>
+                                <td>2025-11-05</td>
+                                <td>6.6.0</td>
+                                <td><span class="badge badge-lts">LTS</span></td>
+                                <td>Long-term support, enhanced stability</td>
+                                <td><a href="#" class="btn-link">Image</a></td>
+                                <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19356" target="_blank" class="jira-link">CHRMOS-19356</a></td>
+                                <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2025W45')">Clone Script</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W38" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2025W38</a></strong></td>
+                                <td>2025-09-20</td>
+                                <td>6.5.3</td>
+                                <td><span class="badge badge-legacy">Legacy</span></td>
+                                <td>Security updates only</td>
+                                <td><a href="#" class="btn-link">Image</a></td>
+                                <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19355" target="_blank" class="jira-link">CHRMOS-19355</a></td>
+                                <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2025W38')">Clone Script</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W29" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2025W29</a></strong></td>
+                                <td>2025-07-15</td>
+                                <td>6.4.0</td>
+                                <td><span class="badge badge-legacy">Legacy</span></td>
+                                <td>Previous stable release</td>
+                                <td><a href="#" class="btn-link">Image</a></td>
+                                <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19354" target="_blank" class="jira-link">CHRMOS-19354</a></td>
+                                <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2025W29')">Clone Script</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- WCL Platform -->
+            <div id="WCL-releases" class="platform-content">
+                <div class="table-wrapper">
+                    <table class="release-table">
+                        <thead>
+                            <tr>
+                                <th>RLS TAG</th>
+                                <th>Release Date</th>
+                                <th>Kernel Version</th>
+                                <th>Status</th>
+                                <th>Key Features</th>
+                                <th>Prebuild Image Link</th>
+                                <th>JIRA Ticket Link</th>
+                                <th>Script to Clone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="WCL-tbody">
+                            <tr>
+                                <td colspan="8" style="text-align: center; padding: 30px;">WCL releases coming soon...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- NVL Platform -->
+            <div id="NVL-releases" class="platform-content">
+                <div class="table-wrapper">
+                <table class="release-table">
+                    <thead>
+                        <tr>
+                            <th>RLS TAG</th>
+                            <th>Release Date</th>
+                            <th>Kernel Version</th>
+                            <th>Status</th>
+                            <th>Key Features</th>
+                            <th>Prebuild Image Link</th>
+                            <th>JIRA Ticket Link</th>
+                            <th>Script to Clone</th>
+                        </tr>
+                    </thead>
+                    <tbody id="NVL-tbody">
+                        <tr>
+                            <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2026W02" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2026W02</a></strong></td>
+                            <td>2026-01-15</td>
+                            <td>6.8.5</td>
+                            <td><span class="badge badge-stable">Stable</span></td>
+                            <td>Performance improvements, security patches</td>
+                            <td><a href="#" class="btn-link">Image</a></td>
+                            <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19358" target="_blank" class="jira-link">CHRMOS-19358</a></td>
+                            <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2026W02')">Clone Script</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W50" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2025W50</a></strong></td>
+                            <td>2025-12-10</td>
+                            <td>6.7.2</td>
+                            <td><span class="badge badge-stable">Stable</span></td>
+                            <td>Driver updates, bug fixes</td>
+                            <td><a href="#" class="btn-link">Image</a></td>
+                            <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19357" target="_blank" class="jira-link">CHRMOS-19357</a></td>
+                            <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2025W50')">Clone Script</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W45" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2025W45</a></strong></td>
+                            <td>2025-11-05</td>
+                            <td>6.6.0</td>
+                            <td><span class="badge badge-lts">LTS</span></td>
+                            <td>Long-term support, enhanced stability</td>
+                            <td><a href="#" class="btn-link">Image</a></td>
+                            <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19356" target="_blank" class="jira-link">CHRMOS-19356</a></td>
+                            <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2025W45')">Clone Script</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W38" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2025W38</a></strong></td>
+                            <td>2025-09-20</td>
+                            <td>6.5.3</td>
+                            <td><span class="badge badge-legacy">Legacy</span></td>
+                            <td>Security updates only</td>
+                            <td><a href="#" class="btn-link">Image</a></td>
+                            <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19355" target="_blank" class="jira-link">CHRMOS-19355</a></td>
+                            <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2025W38')">Clone Script</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong><a href="https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W29" target="_blank" class="release-tag-link">NVL-IA17K6.18DI_2025W29</a></strong></td>
+                            <td>2025-07-15</td>
+                            <td>6.4.0</td>
+                            <td><span class="badge badge-legacy">Legacy</span></td>
+                            <td>Previous stable release</td>
+                            <td><a href="#" class="btn-link">Image</a></td>
+                            <td><a href="https://jira.devtools.intel.com/browse/CHRMOS-19354" target="_blank" class="jira-link">CHRMOS-19354</a></td>
+                            <td><button class="btn-download" onclick="showCloneScript('NVL-IA17K6.18DI_2025W29')">Clone Script</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 ALOS Kernel Project. All rights reserved.</p>
+            <p>For full ALOS build information and support, visit - <a href="https://wiki.ith.intel.com/spaces/CACTUS/pages/4085112348/Sync+Build+ALOS+Kernel" target="_blank">https://wiki.ith.intel.com/spaces/CACTUS/pages/4085112348/Sync+Build+ALOS+Kernel</a></p>
+            <p>For any ALOS kernel issues and support, reach out to <a href="mailto:clke@intel.com">clke@intel.com</a></p>
+        </footer>
+    </div>
+
+    <!-- Modal for Clone Script -->
+    <div id="cloneModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Clone and Build Script</h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

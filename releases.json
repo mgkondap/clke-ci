@@ -1,0 +1,61 @@
+{
+  "PTL": [
+    {
+      "releaseTag": "NVL-IA17K6.18DI_2026W02",
+      "releaseDate": "2026-01-15",
+      "kernelVersion": "6.8.5",
+      "status": "Stable",
+      "features": "Performance improvements, security patches",
+      "imageLink": "#",
+      "jiraTicket": "CHRMOS-19358",
+      "jiraLink": "https://jira.devtools.intel.com/browse/CHRMOS-19358",
+      "manifestLink": "https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2026W02"
+    },
+    {
+      "releaseTag": "NVL-IA17K6.18DI_2025W50",
+      "releaseDate": "2025-12-10",
+      "kernelVersion": "6.7.2",
+      "status": "Stable",
+      "features": "Driver updates, bug fixes",
+      "imageLink": "#",
+      "jiraTicket": "CHRMOS-19357",
+      "jiraLink": "https://jira.devtools.intel.com/browse/CHRMOS-19357",
+      "manifestLink": "https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W50"
+    },
+    {
+      "releaseTag": "NVL-IA17K6.18DI_2025W45",
+      "releaseDate": "2025-11-05",
+      "kernelVersion": "6.6.0",
+      "status": "LTS",
+      "features": "Long-term support, enhanced stability",
+      "imageLink": "#",
+      "jiraTicket": "CHRMOS-19356",
+      "jiraLink": "https://jira.devtools.intel.com/browse/CHRMOS-19356",
+      "manifestLink": "https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W45"
+    },
+    {
+      "releaseTag": "NVL-IA17K6.18DI_2025W38",
+      "releaseDate": "2025-09-20",
+      "kernelVersion": "6.5.3",
+      "status": "Legacy",
+      "features": "Security updates only",
+      "imageLink": "#",
+      "jiraTicket": "CHRMOS-19355",
+      "jiraLink": "https://jira.devtools.intel.com/browse/CHRMOS-19355",
+      "manifestLink": "https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W38"
+    },
+    {
+      "releaseTag": "NVL-IA17K6.18DI_2025W29",
+      "releaseDate": "2025-07-15",
+      "kernelVersion": "6.4.0",
+      "status": "Legacy",
+      "features": "Previous stable release",
+      "imageLink": "#",
+      "jiraTicket": "CHRMOS-19354",
+      "jiraLink": "https://jira.devtools.intel.com/browse/CHRMOS-19354",
+      "manifestLink": "https://github.com/intel-restricted/os.android.externalmirror.alos.kernel-manifest/releases/tag/NVL-IA17K6.18DI_2025W29"
+    }
+  ],
+  "WCL": [],
+  "NVL": []
+}
