@@ -46,7 +46,7 @@ function showPreProdDisclaimer() {
                 <span class="preprod-icon">⚠️</span>
                 <div>
                     <strong>PRE-PRODUCTION ENVIRONMENT</strong><br>
-                    <span style="font-size: 0.9rem;">This is a development/testing portal. For official releases, please visit the production site.</span>
+                    <span style="font-size: 0.9rem;">This is a development/testing portal. For official releases, please visit the <a href="http://clke/" class="prod-link">production site</a>.</span>
                 </div>
             </div>
         `;
